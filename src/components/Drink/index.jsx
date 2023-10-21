@@ -1,7 +1,7 @@
 import './style.css';
 import { Layer } from '../Layer';
 
-export const Drink = ({ name, ordered, image }) => {
+export const Drink = ({ id, name, ordered, image, layers }) => {
   return (
     <div className="drink">
       <div className="drink__product">
@@ -10,7 +10,9 @@ export const Drink = ({ name, ordered, image }) => {
         </div>
         <div className="drink__info">
           <h3>{name}</h3>
-          <Layer color="#feeeca" label="mléčná pěna" />
+          {layers.map((layer, id) => (
+            <Layer key={id} id={id} color={layer.color} label={layer.label} />
+          ))}
         </div>
       </div>
       <div className="drink__controls">
