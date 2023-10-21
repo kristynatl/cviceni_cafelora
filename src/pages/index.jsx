@@ -10,7 +10,7 @@ import { Footer } from '../components/Footer';
 
 document.querySelector('#root').innerHTML = render(
   <div className="page">
-    <Header />
+    <Header id="home" />
     <main>
       <Banner />
       <Menu />
@@ -20,3 +20,13 @@ document.querySelector('#root').innerHTML = render(
     <Footer />
   </div>,
 );
+
+const rolloutNav = document.querySelector('.rollout-nav');
+
+document.querySelector('.nav-btn').addEventListener('click', () => {
+  rolloutNav.classList.toggle('nav-closed');
+});
+
+rolloutNav.addEventListener('click', () => {
+  rolloutNav.classList.toggle('nav-closed');
+});
