@@ -1,7 +1,9 @@
 import './style.css';
 import { Layer } from '../Layer';
 
-export const Drink = ({ id, name, ordered, image, layers }) => {
+export const Drink = ({ name, ordered, image, layers }) => {
+  const orderBtnText = ordered ? 'Zrušit' : 'Objednat';
+  const orderBtnClass = ordered ? 'order-btn order-btn--ordered' : 'order-btn';
   return (
     <div className="drink">
       <div className="drink__product">
@@ -16,7 +18,7 @@ export const Drink = ({ id, name, ordered, image, layers }) => {
         </div>
       </div>
       <div className="drink__controls">
-        <button className="order-btn">Objednat</button>
+        <button className={orderBtnClass}>{orderBtnText}</button>
       </div>
     </div>
   );

@@ -8,18 +8,21 @@ import { Gallery } from '../components/Gallery';
 import { Contact } from '../components/Contact';
 import { Footer } from '../components/Footer';
 
-const response = await fetch('http://localhost:4000/api/drinks');
-const responseJson = await response.json();
-const drinks = responseJson.result;
+const responseDrinksData = await fetch('http://localhost:4000/api/drinks');
+const drinksDataJson = await responseDrinksData.json();
+const drinksData = drinksDataJson.result;
 
-console.log(drinks);
+// ZATÍM NEFUNKČNÍ ZÍSKÁNÍ OBRÁZKŮ Z LOKÁLNÍHO API
+const responseDrinksImages = await fetch('http://localhost:4000/assets/cups');
+console.log(responseDrinksImages);
+// const drinksImagesJson = await responseDrinksImages.json();
 
 document.querySelector('#root').innerHTML = render(
   <div className="page">
-    <Header id="home" />
+    <Header id="home" showMenu={true} />
     <main>
       <Banner />
-      <Menu drinks={drinks} />
+      <Menu drinks={drinksData} />
       <Gallery />
       <Contact />
     </main>
@@ -36,3 +39,16 @@ document.querySelector('.nav-btn').addEventListener('click', () => {
 rolloutNav.addEventListener('click', () => {
   rolloutNav.classList.toggle('nav-closed');
 });
+
+// ZATÍM NEFUNKČNÍ OBJEDNÁVÁNÍ NÁPOJŮ
+// document.querySelectorAll('.order-btn').forEach((button, index) => {
+//   button.addEventListener('click', async () => {
+//     await fetch('http://localhost:4000/api/drinks/:id', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify([{ op: 'replace', path: '/ordered', value: true }]),
+//     });
+//   });
+// });

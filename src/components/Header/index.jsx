@@ -1,21 +1,37 @@
 import './style.css';
 
-export const Header = () => {
-  return (
-    <header id="home">
-      <div className="header__content container">
-        <div className="site-logo"></div>
+export const Header = ({ showMenu }) => {
+  if (showMenu) {
+    return (
+      <header id="home">
+        <div className="header__content container">
+          <div className="site-logo"></div>
 
-        <div className="navigation">
-          <button className="nav-btn"></button>
-          <nav className="rollout-nav nav-closed">
-            <a href="#home">domů</a>
-            <a href="#menu">menu</a>
-            <a href="#gallery">galerie</a>
-            <a href="#contact">kontakt</a>
+          <div className="navigation">
+            <button className="nav-btn"></button>
+            <nav className="rollout-nav nav-closed">
+              <a href="#home">domů</a>
+              <a href="#menu">menu</a>
+              <a href="#gallery">galerie</a>
+              <a href="#contact">kontakt</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
+  if (!showMenu) {
+    return (
+      <header>
+        <div className="header__content container">
+          <div className="site-logo"></div>
+
+          <nav className="inline-nav">
+            <a href="/">Hlavní stránka</a>
           </nav>
         </div>
-      </div>
-    </header>
-  );
+      </header>
+    );
+  }
 };
