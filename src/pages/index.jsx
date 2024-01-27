@@ -12,11 +12,6 @@ const responseDrinksData = await fetch('http://localhost:4000/api/drinks');
 const drinksDataJson = await responseDrinksData.json();
 const drinksData = drinksDataJson.result;
 
-// ZATÍM NEFUNKČNÍ ZÍSKÁNÍ OBRÁZKŮ Z LOKÁLNÍHO API
-const responseDrinksImages = await fetch('http://localhost:4000/assets/cups');
-console.log(responseDrinksImages);
-// const drinksImagesJson = await responseDrinksImages.json();
-
 document.querySelector('#root').innerHTML = render(
   <div className="page">
     <Header id="home" showMenu={true} />
@@ -41,14 +36,18 @@ rolloutNav.addEventListener('click', () => {
 });
 
 // ZATÍM NEFUNKČNÍ OBJEDNÁVÁNÍ NÁPOJŮ
-// document.querySelectorAll('.order-btn').forEach((button, index) => {
-//   button.addEventListener('click', async () => {
-//     await fetch('http://localhost:4000/api/drinks/:id', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify([{ op: 'replace', path: '/ordered', value: true }]),
-//     });
-//   });
-// });
+document.querySelectorAll('.drink_form').forEach((item) => {
+  item.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formElement = e.target;
+    const id = formElement.querySelector('input').value;
+    await fetch(`http://localhost:4000/api/drinks/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([{ op: 'replace', path: '/ordered', value: true }]),
+    });
+    window.location.reload();
+  });
+});
